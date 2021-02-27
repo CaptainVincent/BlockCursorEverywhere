@@ -1,0 +1,8 @@
+// Place your settings in the file "User/BlockCursorEverywhere.sublime-settings", which
+// overrides the settings in here.
+{
+    // Additional vi/vim package names need compatible with this BlockCursorEverywhere.
+    //
+    // These are vi/vim relative packages list
+    "vi/vim_packages": ["Vintageous"],
+}

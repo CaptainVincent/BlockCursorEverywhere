@@ -3,6 +3,8 @@ import sublime_plugin
 import os
 from threading import Timer
 
+setting = sublime.load_settings("BlockCursorEverywhere.sublime-settings")
+
 class BlockCursorEverywhere(sublime_plugin.EventListener):
     def show_block_cursor(self, view):
         validRegions = []
@@ -15,11 +17,11 @@ class BlockCursorEverywhere(sublime_plugin.EventListener):
         else:
             view.erase_regions('BlockCursorListener')
 
-    def is_vintageous_installed(self):
+    def is_NeoVintageous_installed(self):
         if int(sublime.version()) < 3000:
-            return os.path.isdir(os.path.join(sublime.packages_path(), 'Vintageous'))
+            return os.path.isdir(os.path.join(sublime.packages_path(), 'NeoVintageous'))
         else:
-            return os.path.exists(os.path.join(sublime.installed_packages_path(), 'Vintageous.sublime-package'))
+            return os.path.exists(os.path.join(sublime.installed_packages_path(), 'NeoVintageous.sublime-package'))
 
     def is_enabled(self, view, package_name):
         return package_name not in view.settings().get('ignored_packages', [])
@@ -44,8 +46,8 @@ class BlockCursorEverywhere(sublime_plugin.EventListener):
         self.timer = Timer(0, lambda: none)
 
         self.vintage_enabled = self.is_enabled(view, 'Vintage')
-        self.vintageous_enabled = self.is_vintageous_installed() and self.is_enabled(view, 'Vintageous')
-        self.vi_enabled = self.vintage_enabled or self.vintageous_enabled
+        self.NeoVintageous_enabled = self.is_NeoVintageous_installed() and self.is_enabled(view, 'NeoVintageous')
+        self.vi_enabled = self.vintage_enabled or self.NeoVintageous_enabled
 
         self.on_selection_modified(view)
         view.settings().add_on_change('command_mode', self.on_command_mode_change)
